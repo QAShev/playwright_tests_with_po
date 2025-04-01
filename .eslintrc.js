@@ -20,6 +20,8 @@ module.exports = {
     rules: {
         'import/prefer-default-export': 'off',
         'max-classes-per-file': 'off',
+        'no-plusplus': 'off',
+        'no-await-in-loop': 'off',
         indent: [
             'error',
             4,
