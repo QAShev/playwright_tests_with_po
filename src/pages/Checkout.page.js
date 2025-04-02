@@ -13,11 +13,11 @@ export class CheckoutPage extends BaseSwagLabPage {
 
     cartItems = this.page.locator(this.storeItemSelector);
 
-    actualPrice = this.page.getByTestId('subtotal-label').innerText();
+    actualPrice = this.page.getByTestId('subtotal-label');
 
-    tax = this.page.getByTestId('tax-label').innerText();
+    tax = this.page.getByTestId('tax-label');
 
-    finalPrice = this.page.getByTestId('total-label').innerText();
+    finalPrice = this.page.getByTestId('total-label');
 
     async getStoreElementsInfo() {
         const cartItemCount = await this.cartItems.count();

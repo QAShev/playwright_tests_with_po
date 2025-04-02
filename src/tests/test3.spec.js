@@ -35,17 +35,17 @@ test.describe('Test3', () => {
         // Get element sum cards prices
         const itemsTotalPrice = await app.checkout.getTotalPrice();
         // Get element total price without tax
-        const actualPriceElement = await app.checkout.actualPrice;
+        const actualPriceElement = await app.checkout.actualPrice.innerText();
         // Get value total price
         const actualPrice = parseFloat(actualPriceElement.split('$')[1]);
         // Compare
         expect(itemsTotalPrice).toEqual(actualPrice);
         // Get tax element
-        const taxElement = await app.checkout.tax;
+        const taxElement = await app.checkout.tax.innerText();
         // Get tax value
         const tax = parseFloat(taxElement.split('$')[1]);
         // Get final price
-        const finalPriceElement = await app.checkout.finalPrice;
+        const finalPriceElement = await app.checkout.finalPrice.innerText();
         // Get final price value
         const finalPrice = parseFloat(finalPriceElement.split('$')[1]);
         // Compare
