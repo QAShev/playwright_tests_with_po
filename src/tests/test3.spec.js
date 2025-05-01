@@ -13,7 +13,7 @@ test.describe('Test3', () => {
         /** @type {{ app: import('../pages/Application').Application }} */{ app },
     ) => {
         // Call function for add random cards
-        const addedItems = await app.inventory.addRandomItems(3);
+        const addedItems = await app.inventory.addRandomItems();
         // Go to chart
         await app.inventory.shoppingCart.click();
         // Get added card info
@@ -23,9 +23,7 @@ test.describe('Test3', () => {
         // Go to checkout page
         await app.shoppingCart.checkoutBtn.click();
         // Fill data
-        await app.checkout.firstNameInput.fill('John');
-        await app.checkout.lastNameInput.fill('Dou');
-        await app.checkout.postalCodeInput.fill('10030');
+        await app.checkout.fillCheckout()
         // Go to step 2 checkout page
         await app.checkout.continueBtn.click();
         // Get array of added elements
@@ -35,20 +33,14 @@ test.describe('Test3', () => {
         // Get element sum cards prices
         const itemsTotalPrice = await app.checkout.getTotalPrice();
         // Get element total price without tax
-        const actualPriceElement = await app.checkout.actualPrice.innerText();
-        // Get value total price
-        const actualPrice = parseFloat(actualPriceElement.split('$')[1]);
+        const actualPrice = await app.checkout.getPriceWithoutTax()
         // Compare
         expect(itemsTotalPrice).toEqual(actualPrice);
         // Get tax element
-        const taxElement = await app.checkout.tax.innerText();
-        // Get tax value
-        const tax = parseFloat(taxElement.split('$')[1]);
+        const tax = await app.checkout.getTax()
         // Get final price
-        const finalPriceElement = await app.checkout.finalPrice.innerText();
-        // Get final price value
-        const finalPrice = parseFloat(finalPriceElement.split('$')[1]);
+        const finalPrice = await app.checkout.getFinalPrice()
         // Compare
-        expect(finalPrice).toEqual(actualPrice + tax);
+        expect(finalPrice).toEqual(parseFloat((actualPrice + tax).toFixed(2)));
     });
 });

@@ -22,6 +22,8 @@ module.exports = {
         'max-classes-per-file': 'off',
         'no-plusplus': 'off',
         'no-await-in-loop': 'off',
+        'class-methods-use-this': 'off',
+        'no-conditional-in-test': 'off',
         indent: [
             'error',
             4,

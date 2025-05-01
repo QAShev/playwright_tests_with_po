@@ -13,7 +13,7 @@ test.describe('Test2', () => {
         /** @type {{ app: import('../pages/Application').Application }} */{ app },
     ) => {
         // Call function for add random cards
-        const addedItems = await app.inventory.addRandomItems(3);
+        const addedItems = await app.inventory.addRandomItems();
         // Go to chart
         await app.inventory.shoppingCart.click();
         // Get added card info

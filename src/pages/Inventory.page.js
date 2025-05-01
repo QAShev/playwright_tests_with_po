@@ -23,8 +23,7 @@ export class InventoryPage extends BaseSwagLabPage {
         return this.page.$$eval('.inventory_item_price', (prE) => prE.map((el) => parseFloat(el.textContent.replace('$', ''))));
     }
 
-    async addRandomItems(count) {
-        const itemsCount = await this.inventoryItems.count();
+    generateRandomArrayOfNumbers (count, itemsCount) {
         let indices = [];
         while (indices.length < count) {
             const index = Math.floor(Math.random() * itemsCount);
@@ -33,6 +32,13 @@ export class InventoryPage extends BaseSwagLabPage {
             }
         }
         indices = indices.sort((a, b) => b - a);
+        return indices;
+    }
+
+    async addRandomItems() {
+        const count = Math.floor(Math.random() * 7);
+        const itemsCount = await this.inventoryItems.count();
+        const indices = this.generateRandomArrayOfNumbers(count, itemsCount);
         const addedItems = [];
         for (let i = 0; i < indices.length; i++) {
             const item = indices[i];

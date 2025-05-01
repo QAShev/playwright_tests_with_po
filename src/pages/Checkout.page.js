@@ -39,4 +39,21 @@ export class CheckoutPage extends BaseSwagLabPage {
         }
         return total;
     }
+    async fillCheckout() {
+        await this.firstNameInput.fill('John');
+        await this.lastNameInput.fill('Dou');
+        await this.postalCodeInput.fill('10030');
+    }
+    async getPriceWithoutTax () {
+        const actualPriceElement = await this.actualPrice.innerText();
+        return parseFloat(actualPriceElement.split('$')[1]);
+    }
+    async getTax () {
+        const taxElement = await this.tax.innerText();
+        return parseFloat(taxElement.split('$')[1]);
+    }
+    async getFinalPrice () {
+        const finalPriceElement = await this.finalPrice.innerText();
+        return parseFloat(finalPriceElement.split('$')[1]);
+    }
 }
