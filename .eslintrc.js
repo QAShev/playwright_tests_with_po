@@ -24,6 +24,7 @@ module.exports = {
         'no-await-in-loop': 'off',
         'class-methods-use-this': 'off',
         'no-conditional-in-test': 'off',
+        'func-names': 'off',
         indent: [
             'error',
             4,

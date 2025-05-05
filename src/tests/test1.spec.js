@@ -2,6 +2,12 @@ import { expect } from '@playwright/test';
 import { test } from '../fixtures/base';
 import { sortOptions } from '../pages/Inventory.page';
 
+test.beforeEach(async ({ app }) => {
+    await app.login.navigate();
+    await app.login.performLogin('standard_user', 'secret_sauce');
+    await expect(app.inventory.headerTitle).toBeVisible();
+    expect(await app.inventory.inventoryItems.count()).toBeGreaterThanOrEqual(1);
+});
 [
     {
         name: 'Sorting by A-Z',
@@ -26,12 +32,6 @@ import { sortOptions } from '../pages/Inventory.page';
         sortFn: (a, b) => b - a,
     },
 ].forEach(({ name, sortType, byPrice, sortFn }) => {
-    test.beforeEach(async ({ app }) => {
-        await app.login.navigate();
-        await app.login.performLogin('standard_user', 'secret_sauce');
-        await expect(app.inventory.headerTitle).toBeVisible();
-        expect(await app.inventory.inventoryItems.count()).toBeGreaterThanOrEqual(1);
-    });
     test.describe('Sorting', () => {
         test(`${name}`, async ({ app }) => {
             // Get all cards names
