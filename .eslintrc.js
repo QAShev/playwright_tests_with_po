@@ -18,6 +18,13 @@ module.exports = {
         ecmaVersion: 'latest',
     },
     rules: {
+        'import/prefer-default-export': 'off',
+        'max-classes-per-file': 'off',
+        'no-plusplus': 'off',
+        'no-await-in-loop': 'off',
+        'class-methods-use-this': 'off',
+        'no-conditional-in-test': 'off',
+        'func-names': 'off',
         indent: [
             'error',
             4,
@@ -35,4 +42,5 @@ module.exports = {
             ignoreRegExpLiterals: true,
         }],
     },
+    ignorePatterns: ['playwright-report/*'],
 };
